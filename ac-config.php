@@ -8,4 +8,8 @@
     if ( ! defined( 'ABSPATH' ) ) {
         define( 'ABSPATH', dirname( __FILE__ ) . '/' );
     }
+    /*
+    Sql name and password shows here isn't real.
+    It's a experimental sql created for testing.
+    */
 ?>
