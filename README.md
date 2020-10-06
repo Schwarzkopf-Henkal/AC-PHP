@@ -1,4 +1,5 @@
-# Antarctic-Commune-PHP
-PHP(and even more) Event Developing on "Antarctic Commune"
+# AC-PHP
 
-暂时还没有什么用的项目，可能到时候会填进去一些给服务器用的PHP文件
+甚至都忘了当初这个仓库是用来干啥的了
+
+反正网页不用搭了，数据库什么的到时候再说吧。
