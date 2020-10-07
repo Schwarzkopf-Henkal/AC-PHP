@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <style>
+        .center {
+            text-align: center;
+        }
+        
+        .textred {
+            color: red;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <title>Man of War Np0.1</title>
+
+</head>
+<script src="content/pixi.min.js"></script>
+
+<body>
+    <!-- <h1 class="center textred">index.php</h1> -->
+    <script type="text/javascript">
+        let type = "WebGL";
+        if (!PIXI.utils.isWebGLSupported()) {
+            type = "canvas";
+        }
+        PIXI.utils.sayHello(type);
+        // console.log(document.body.clientWidth);
+        // console.log(document.body.clientHeight);
+        let app = new PIXI.Application({
+            width: screen.availWidth - 30,
+            height: screen.availHeight - 130,
+            antialias: true
+        });
+        document.body.appendChild(app.view);
+        app.renderer.view.style.position = "absolute";
+        app.renderer.view.style.display = "block";
+        app.renderer.autoDensity = true;
+        app.renderer.resize(window.innerWidth, window.innerHeight);
+        PIXI.loader.add(["content/DG.jpg", "content/NK1.png"]).load(setup);
+        PIXI.loader.onProgress.add(loadProgressHandler);
+
+        function setup() {
+            let dg = new PIXI.Sprite(PIXI.loader.resources["content/DG.jpg"].texture);
+            console.log("All files loaded.");
+            dg.x = 100;
+            dg.y = 100;
+            dg.anchor.set(0.5, 0.5);
+            app.stage.addChild(dg);
+        }
+
+        function onclick() {
+            dg.texture = PIXI.utils.TextureCache["content/NK1.png"];
+        }
+
+        function loadProgressHandler(loader, resource) {
+            console.log("Loading: " + resource.url);
+            console.log("Progress: " + loader.progress + "%");
+        }
+    </script>
+</body>
+
+</html>
