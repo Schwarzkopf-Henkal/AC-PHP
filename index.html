@@ -14,43 +14,75 @@
         
         * {
             padding: 0;
-            margin: 0;
+            width: auto;
+            height: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            margin: auto;
         }
     </style>
     <title>Man of War Np0.1</title>
-
+    <link rel="apple-touch-icon" sizes="57x57" href="content/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="content/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="content/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="content/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="content/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="content/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="content/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="content/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="content/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="content/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="content/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="content/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="content/favicon-16x16.png">
+    <link rel="manifest" href="content/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="content/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <script src="content/pixi.min.js"></script>
 
 <body>
+    <div class="description"></div>
     <!-- <h1 class="center textred">index.php</h1> -->
     <script type="text/javascript">
         let type = "WebGL";
         if (!PIXI.utils.isWebGLSupported()) {
             type = "canvas";
+            var para = document.createElement("h1");
+            var txt = document.createTextNode("你的浏览器不支持WebGL，赶紧给我去升级！请务必使用最新版Chrome或者别的什么支持WebGL的浏览器浏览本页面。");
+            para.appendChild(txt);
+            var divx = document.getElementsByClassName("description");
+            divx[0].appendChild(para);
+            para.appendChild(txt);
         }
         PIXI.utils.sayHello(type);
         // console.log(document.body.clientWidth);
         // console.log(document.body.clientHeight);
         let app = new PIXI.Application({
-            width: screen.availWidth - 30,
-            height: screen.availHeight - 130,
-            antialias: true
+            width: 962,
+            height: 600,
+            // antialias: true
         });
         document.body.appendChild(app.view);
-        app.renderer.view.style.position = "absolute";
-        app.renderer.view.style.display = "block";
-        app.renderer.autoDensity = true;
-        app.renderer.resize(window.innerWidth, window.innerHeight);
-        PIXI.loader.add(["content/DG.jpg", "content/NK1.png"]).load(setup);
+        // app.renderer.view.style.position = "absolute";
+        // app.renderer.view.style.display = "block";
+        // app.renderer.autoDensity = true;
+        // app.renderer.resize(800, window.innerHeight);
+        PIXI.loader.add(["content/DG.jpg", "content/NK1.png", "https://cdn.jsdelivr.net/gh/Schwarzkopf-Henkal/CDN/A1.jpg"]).load(setup);
         PIXI.loader.onProgress.add(loadProgressHandler);
 
         function setup() {
             let dg = new PIXI.Sprite(PIXI.loader.resources["content/DG.jpg"].texture);
+            let Background = new PIXI.Sprite(PIXI.loader.resources["https://cdn.jsdelivr.net/gh/Schwarzkopf-Henkal/CDN/A1.jpg"].texture);
             console.log("All files loaded.");
             dg.x = 100;
             dg.y = 100;
             dg.anchor.set(0.5, 0.5);
+            app.stage.addChild(Background);
             app.stage.addChild(dg);
         }
 
