@@ -59,9 +59,11 @@
         var A1url = "https://cdn.jsdelivr.net/gh/Schwarzkopf-Henkal/CDN/A2.jpg";
         var nekourl = "https://cdn.jsdelivr.net/gh/Schwarzkopf-Henkal/CDN/NKS1.png";
         var diaurl = "https://cdn.jsdelivr.net/gh/Schwarzkopf-Henkal/CDN/DA3.png";
+        var Background, neko, dial;
+        var txtstr = new Array("……", '"Henkal: 漫漫长夜，门可罗雀……"');
+        // var CurDisStr;
         PIXI.loader.add([nekourl, A1url, diaurl]).load(setup);
         PIXI.loader.onProgress.add(loadProgressHandler);
-        var Background, neko, dial;
 
         function setup() {
             // Background = new PIXI.Sprite(PIXI.loader.resources[A1url].texture);
@@ -69,9 +71,12 @@
             neko = new PIXI.Sprite(PIXI.loader.resources[nekourl].texture);
             dial = new PIXI.Sprite(PIXI.loader.resources[diaurl].texture);
             console.log("All files loaded.");
+            CurDisStr = new PIXI.Text("……");
+            CurDisStr.visible = false;
+            CurDisStr.position.set(150, 440);
             neko.anchor.set(0, 1);
             neko.x = 100;
-            neko.y = 590;
+            neko.y = 520;
             dial.anchor.set(0, 1);
             dial.width = 762;
             // dial.height = 200;
@@ -79,7 +84,10 @@
             dial.y = 580;
             dial.alpha = 0;
             app.stage.addChild(Background);
+            app.stage.addChild(neko);
             app.stage.addChild(dial);
+            app.stage.addChild(CurDisStr);
+            neko.visible = false;
             var tsetup = new Date().getTime();
             // app.stage.addChild(neko);
             // await sleep(1000);
@@ -92,10 +100,32 @@
                 dial.alpha += 0.02;
                 await sleep(20);
             }
+            await sleep(300);
+            Displaystr(txtstr[0]);
+            await sleep(2000);
+            Displaystr(txtstr[1]);
+            await sleep(300);
+            ShowUp(neko);
+        }
+
+        function Loop1() {
+            let tcur = new Date().getTime();
+
         }
 
         function Displaystr(str) {
-
+            // CurDisStr.visible = false;
+            CurDisStr.text = str;
+            CurDisStr.visible = true;
+            // CurDisStr.position.set(150,400);
+        }
+        async function ShowUp(spr) {
+            neko.alpha = 0;
+            neko.visible = true;
+            while (neko.alpha < 1) {
+                neko.alpha += 0.04;
+                await sleep(20);
+            }
         }
         // function onclick() {
         // dg.texture = PIXI.utils.TextureCache["content/NK1.png"];
