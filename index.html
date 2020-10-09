@@ -49,7 +49,7 @@
         let app = new PIXI.Application({
             width: 962,
             height: 600,
-            // antialias: true
+            antialias: true
         });
         document.body.appendChild(app.view);
         // app.renderer.view.style.position = "absolute";
@@ -58,30 +58,55 @@
         // app.renderer.resize(800, window.innerHeight);
         var A1url = "https://cdn.jsdelivr.net/gh/Schwarzkopf-Henkal/CDN/A2.jpg";
         var nekourl = "https://cdn.jsdelivr.net/gh/Schwarzkopf-Henkal/CDN/NKS1.png";
-        PIXI.loader.add([nekourl, A1url]).load(setup);
+        var diaurl = "https://cdn.jsdelivr.net/gh/Schwarzkopf-Henkal/CDN/DA3.png";
+        PIXI.loader.add([nekourl, A1url, diaurl]).load(setup);
         PIXI.loader.onProgress.add(loadProgressHandler);
+        var Background, neko, dial;
 
         function setup() {
-            let Background = new PIXI.Sprite(PIXI.loader.resources[A1url].texture);
-            let neko = new PIXI.Sprite(PIXI.loader.resources[nekourl].texture);
+            // Background = new PIXI.Sprite(PIXI.loader.resources[A1url].texture);
+            Background = new PIXI.Sprite.from(A1url);
+            neko = new PIXI.Sprite(PIXI.loader.resources[nekourl].texture);
+            dial = new PIXI.Sprite(PIXI.loader.resources[diaurl].texture);
             console.log("All files loaded.");
             neko.anchor.set(0, 1);
-            neko.x = 50;
-            neko.y = 580;
+            neko.x = 100;
+            neko.y = 590;
+            dial.anchor.set(0, 1);
+            dial.width = 762;
+            // dial.height = 200;
+            dial.x = 100;
+            dial.y = 580;
+            dial.alpha = 0;
             app.stage.addChild(Background);
-            app.stage.addChild(neko);
+            app.stage.addChild(dial);
+            var tsetup = new Date().getTime();
+            // app.stage.addChild(neko);
+            // await sleep(1000);
+            Background.interactive = true;
+            Background.on('click', DiaOn);
+        }
+        async function DiaOn() {
+            // dial.alpha = 0;
+            while (dial.alpha < 1) {
+                dial.alpha += 0.02;
+                await sleep(20);
+            }
         }
 
-        function onclick() {
-            // dg.texture = PIXI.utils.TextureCache["content/NK1.png"];
+        function Displaystr(str) {
+
         }
+        // function onclick() {
+        // dg.texture = PIXI.utils.TextureCache["content/NK1.png"];
+        // }
 
         function loadProgressHandler(loader, resource) {
             console.log("Loading: " + resource.url);
             console.log("Progress: " + loader.progress + "%");
         }
 
-        function sleep(ms) { //Please use await
+        function sleep(ms) { //Please use await in async
             return new Promise(resolve => setTimeout(resolve, ms))
         }
     </script>
