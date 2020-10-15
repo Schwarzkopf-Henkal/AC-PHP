@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Man of War</title>
+    <link rel="stylesheet" type="text/css" href="Main.css">
+    <link rel="shortcut icon" sizes="57x57" href="content/DG.jpg">
+    <script src="https://cdn.jsdelivr.net/gh/Schwarzkopf-Henkal/CDN/pixi.min.js"></script>
+</head>
+
+<body>
+    <div class="description"></div>
+    <script type="text/javascript">
+        let type = "WebGL";
+        if (!PIXI.utils.isWebGLSupported()) {
+            type = "canvas";
+            var para = document.createElement("h1");
+            var txt = document.createTextNode(`你的浏览器不支持WebGL，赶紧给我去升级！请务必使用最新版Chrome或者别的什么支持WebGL的浏览器浏览本页面。`);
+            para.appendChild(txt);
+            var divx = document.getElementsByClassName("description");
+            divx[0].appendChild(para);
+        }
+        PIXI.utils.sayHello(type);
+        let app = new PIXI.Application({
+            width: 962,
+            height: 600,
+            antialias: true
+        });
+        document.body.appendChild(app.view);
+        // PIXI.loader.add([]).load(setup);
+        // PIXI.loader.onProgress.add(loadProgressHandler);
+        var DefaultTxtStyle = {
+            fontFamily: 'Noto Serif SC',
+            fontSize: '18px',
+            wordWrap: true,
+            wordWrapWidth: 440
+        }
+
+        function setup() {
+            console.log("All files loaded.");
+        }
+
+        function loadProgressHandler(loader, resource) {
+            console.log("Loading: " + resource.url);
+            console.log("Progress: " + loader.progress + "%");
+        }
+    </script>
+</body>
+
+</html>

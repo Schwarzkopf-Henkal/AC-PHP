@@ -1,0 +1,25 @@
+.center {
+    text-align: center;
+}
+
+.textred {
+    color: red;
+}
+
+* {
+    padding: 0;
+    width: auto;
+    height: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    margin: auto;
+}
+
+@font-face {
+    font-family: 'Noto Serif SC';
+    src: url('https://cdn.jsdelivr.net/gh/Schwarzkopf-Henkal/CDN/Medium.otf');
+    font-display: swap;
+}
